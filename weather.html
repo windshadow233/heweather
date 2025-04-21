@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<header>
+  <meta charset="utf8">
+  <link rel="stylesheet" href="css/weather.css">
+  <link rel="stylesheet" href="css/qweather-icons.css">
+  <script>
+window.onload = function () {
+    color();
+};
+function color() {
+    var date = new Date();
+    var current_hour = date.getHours();
+
+    if (!(current_hour >= 6 && current_hour < 18)) {
+        document.body.style.backgroundImage = "linear-gradient(rgb(25 23 58), rgb(25 29 45))";
+        document.getElementById("today-weather").style.backgroundImage = "linear-gradient(225deg, #0d3447, #0e0e2c)";
+        document.getElementById("air").style.backgroundImage = "linear-gradient(225deg, #191a5b, #090b1e)";
+        document.getElementById("hours-weather").style.backgroundImage = "linear-gradient(225deg, #0d294b, #1c1c27)";
+        document.getElementById("days-weather").style.backgroundImage = "linear-gradient(225deg, #0f2a4b, #0f0f14)";
+        air = document.getElementsByName("warning-box");
+        for (var i = 0; i <air.length; i++) {
+          air[i].style.backgroundImage = "linear-gradient(225deg, #55112a, #160511)";
+        }
+        document.body.style.color = "#cecece";
+    }
+}
+</script>
+</header>
+
+<body>
+  <div class="main">
+    <div class="today-weather" id="today-weather">
+      <div class="today-top">
+        <div class="text-center">
+          <h1 class="city">合肥</h1>
+          <p class="realtime-tem">17°</p>
+        </div>
+
+        <div class="text-center">
+          <p class="obs-time">2025-04-22T04:40+08:00</p>
+          <em class="qi-305"></em>
+          <p class="realtime-text">小雨</p>
+        </div>
+      </div>
+
+
+
+      <div class="today-button">
+        <div>
+          <p>3级</p>
+          <p class="des">西北风</p>
+        </div>
+        <div>
+          <p>97%</p>
+          <p class="des">相对湿度</p>
+        </div>
+        <div>
+          <p>0.0mm</p>
+          <p class="des">降水量</p>
+        </div>
+        <div>
+          <p>2km</p>
+          <p class="des">能见度</p>
+        </div>
+      </div>
+    </div>
+
+    
+
+    
+    <div class="air" id="air">
+      <div class="air-box-top">
+          <span class="air-tag" style="background-color:#A9A538;">72 良</span>
+      </div>
+      <div class="air-box">
+          <div class="air-data">
+              <p>52</p>
+              <meter value="52" min="0" max="200"></meter>
+              <p class="des">PM2.5</p>
+          </div>
+          <div class="air-data">
+              <p>68</p>
+              <meter value="68" min="0" max="200"></meter>
+              <p class="des">PM10</p>
+          </div>
+          <div class="air-data">
+              <p>62</p>
+              <meter value="62" min="0" max="200"></meter>
+              <p class="des">O<sub>3</sub></p>
+          </div>
+          <div class="air-data">
+              <p>0.8</p>
+              <meter value="0.8" min="0" max="200"></meter>
+              <p class="des">CO</p>
+          </div>
+          <div class="air-data">
+              <p>11</p>
+              <meter value="11" min="0" max="200"></meter>
+              <p class="des">NO<sub>2</sub></p>
+          </div>
+          <div class="air-data">
+              <p>5</p>
+              <meter value="5" min="0" max="200"></meter>
+              <p class="des">SO<sub>2</sub></p>
+          </div>
+      </div>
+  </div>
+  
+
+    <div class="hours-weather" id="hours-weather">
+      <div class="hour-box">
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>18°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 72px;"></div></div>
+            <p class="qi-104 icon-size"></p>
+            <p class="hour-des">5AM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>19°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 77px;"></div></div>
+            <p class="qi-305 icon-size"></p>
+            <p class="hour-des">7AM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>20°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 81px;"></div></div>
+            <p class="qi-104 icon-size"></p>
+            <p class="hour-des">9AM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>21°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 86px;"></div></div>
+            <p class="qi-104 icon-size"></p>
+            <p class="hour-des">11AM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>23°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 95px;"></div></div>
+            <p class="qi-104 icon-size"></p>
+            <p class="hour-des">1PM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>24°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 100px;"></div></div>
+            <p class="qi-101 icon-size"></p>
+            <p class="hour-des">3PM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>24°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 100px;"></div></div>
+            <p class="qi-101 icon-size"></p>
+            <p class="hour-des">5PM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>22°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 90px;"></div></div>
+            <p class="qi-151 icon-size"></p>
+            <p class="hour-des">7PM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>19°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 77px;"></div></div>
+            <p class="qi-151 icon-size"></p>
+            <p class="hour-des">9PM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>17°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 68px;"></div></div>
+            <p class="qi-150 icon-size"></p>
+            <p class="hour-des">11PM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>15°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 59px;"></div></div>
+            <p class="qi-150 icon-size"></p>
+            <p class="hour-des">1AM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">      
+            <p>14°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 54px;"></div></div>
+            <p class="qi-150 icon-size"></p>
+            <p class="hour-des">3AM</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="days-weather" id="days-weather">
+      
+      <div class="days">
+        <!-- 1 -->
+        <div class="week-date">
+          <p class="weeks">周二</p>
+          <p class="date">4月22日</p>
+        </div>
+        <!-- 2 -->
+        <div class="tem-text">
+          <p class="days-temp">24°</p>
+          <p class="days-text">多云</p>
+        </div>
+        <!-- 3 -->
+        <div class="tem-line-box">
+
+          <div class="days-icon">
+            <div>
+              <em class="qi-101 icon-size icon-day"></em>
+
+            </div>
+            <div class="icon-night">
+              <em class="qi-150 icon-size icon-night"></em>
+            </div>
+          </div>
+
+          <div class="tem-line-outbox">
+            <div class="tem-line"></div>
+          </div>
+
+        </div>
+        <!-- 4 -->
+        <div class="tem-text">
+          <p class="days-temp">12°</p>
+          <p class="days-text">晴</p>
+
+        </div>
+      </div>
+      
+      <div class="days">
+        <!-- 1 -->
+        <div class="week-date">
+          <p class="weeks">周三</p>
+          <p class="date">4月23日</p>
+        </div>
+        <!-- 2 -->
+        <div class="tem-text">
+          <p class="days-temp">25°</p>
+          <p class="days-text">晴</p>
+        </div>
+        <!-- 3 -->
+        <div class="tem-line-box">
+
+          <div class="days-icon">
+            <div>
+              <em class="qi-100 icon-size icon-day"></em>
+
+            </div>
+            <div class="icon-night">
+              <em class="qi-151 icon-size icon-night"></em>
+            </div>
+          </div>
+
+          <div class="tem-line-outbox">
+            <div class="tem-line"></div>
+          </div>
+
+        </div>
+        <!-- 4 -->
+        <div class="tem-text">
+          <p class="days-temp">12°</p>
+          <p class="days-text">多云</p>
+
+        </div>
+      </div>
+      
+      <div class="days">
+        <!-- 1 -->
+        <div class="week-date">
+          <p class="weeks">周四</p>
+          <p class="date">4月24日</p>
+        </div>
+        <!-- 2 -->
+        <div class="tem-text">
+          <p class="days-temp">23°</p>
+          <p class="days-text">阴</p>
+        </div>
+        <!-- 3 -->
+        <div class="tem-line-box">
+
+          <div class="days-icon">
+            <div>
+              <em class="qi-104 icon-size icon-day"></em>
+
+            </div>
+            <div class="icon-night">
+              <em class="qi-151 icon-size icon-night"></em>
+            </div>
+          </div>
+
+          <div class="tem-line-outbox">
+            <div class="tem-line"></div>
+          </div>
+
+        </div>
+        <!-- 4 -->
+        <div class="tem-text">
+          <p class="days-temp">13°</p>
+          <p class="days-text">多云</p>
+
+        </div>
+      </div>
+      
+      <div class="days">
+        <!-- 1 -->
+        <div class="week-date">
+          <p class="weeks">周五</p>
+          <p class="date">4月25日</p>
+        </div>
+        <!-- 2 -->
+        <div class="tem-text">
+          <p class="days-temp">23°</p>
+          <p class="days-text">晴</p>
+        </div>
+        <!-- 3 -->
+        <div class="tem-line-box">
+
+          <div class="days-icon">
+            <div>
+              <em class="qi-100 icon-size icon-day"></em>
+
+            </div>
+            <div class="icon-night">
+              <em class="qi-151 icon-size icon-night"></em>
+            </div>
+          </div>
+
+          <div class="tem-line-outbox">
+            <div class="tem-line"></div>
+          </div>
+
+        </div>
+        <!-- 4 -->
+        <div class="tem-text">
+          <p class="days-temp">11°</p>
+          <p class="days-text">多云</p>
+
+        </div>
+      </div>
+      
+      <div class="days">
+        <!-- 1 -->
+        <div class="week-date">
+          <p class="weeks">周六</p>
+          <p class="date">4月26日</p>
+        </div>
+        <!-- 2 -->
+        <div class="tem-text">
+          <p class="days-temp">26°</p>
+          <p class="days-text">多云</p>
+        </div>
+        <!-- 3 -->
+        <div class="tem-line-box">
+
+          <div class="days-icon">
+            <div>
+              <em class="qi-101 icon-size icon-day"></em>
+
+            </div>
+            <div class="icon-night">
+              <em class="qi-305 icon-size icon-night"></em>
+            </div>
+          </div>
+
+          <div class="tem-line-outbox">
+            <div class="tem-line"></div>
+          </div>
+
+        </div>
+        <!-- 4 -->
+        <div class="tem-text">
+          <p class="days-temp">15°</p>
+          <p class="days-text">小雨</p>
+
+        </div>
+      </div>
+      
+      <div class="days">
+        <!-- 1 -->
+        <div class="week-date">
+          <p class="weeks">周日</p>
+          <p class="date">4月27日</p>
+        </div>
+        <!-- 2 -->
+        <div class="tem-text">
+          <p class="days-temp">25°</p>
+          <p class="days-text">多云</p>
+        </div>
+        <!-- 3 -->
+        <div class="tem-line-box">
+
+          <div class="days-icon">
+            <div>
+              <em class="qi-101 icon-size icon-day"></em>
+
+            </div>
+            <div class="icon-night">
+              <em class="qi-151 icon-size icon-night"></em>
+            </div>
+          </div>
+
+          <div class="tem-line-outbox">
+            <div class="tem-line"></div>
+          </div>
+
+        </div>
+        <!-- 4 -->
+        <div class="tem-text">
+          <p class="days-temp">14°</p>
+          <p class="days-text">多云</p>
+
+        </div>
+      </div>
+      
+      <div class="days">
+        <!-- 1 -->
+        <div class="week-date">
+          <p class="weeks">周一</p>
+          <p class="date">4月28日</p>
+        </div>
+        <!-- 2 -->
+        <div class="tem-text">
+          <p class="days-temp">27°</p>
+          <p class="days-text">多云</p>
+        </div>
+        <!-- 3 -->
+        <div class="tem-line-box">
+
+          <div class="days-icon">
+            <div>
+              <em class="qi-101 icon-size icon-day"></em>
+
+            </div>
+            <div class="icon-night">
+              <em class="qi-104 icon-size icon-night"></em>
+            </div>
+          </div>
+
+          <div class="tem-line-outbox">
+            <div class="tem-line"></div>
+          </div>
+
+        </div>
+        <!-- 4 -->
+        <div class="tem-text">
+          <p class="days-temp">16°</p>
+          <p class="days-text">阴</p>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+</body>
