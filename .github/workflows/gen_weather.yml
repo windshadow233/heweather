@@ -2,6 +2,9 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
 
 jobs:
   build:
@@ -9,6 +12,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 135
+          install-chromedriver: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,16 +38,13 @@ jobs:
 
       - name: Run main.py
         env:
-          CITY_NAME: ${{ secrets.CITY_NAME }}
+          CITY_NAME: ${{ vars.CITY_NAME }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           API_HOST: ${{ secrets.API_HOST }}
           JWT_SUB: ${{ secrets.JWT_SUB }}
           JWT_KEY_ID: ${{ secrets.JWT_KEY_ID }}
         run: |
           python main.py
-          mkdir -p publish/
-          cp -r heweather/templates/* publish/
-          mv weather.html publish/
 
       - name: Copy templates to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@v4
@@ -46,3 +52,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: publish
+          clean: true

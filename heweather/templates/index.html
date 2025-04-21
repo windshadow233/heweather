@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
-<header>
+<head>
   <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/weather.css">
   <link rel="stylesheet" href="css/qweather-icons.css">
   <script>
@@ -26,7 +27,7 @@ function color() {
     }
 }
 </script>
-</header>
+</head>
 
 <body>
   <div class="main">
@@ -36,16 +37,12 @@ function color() {
           <h1 class="city">{{ city }}</h1>
           <p class="realtime-tem">{{ now['temp'] }}°</p>
         </div>
-
         <div class="text-center">
           <p class="obs-time">{{ now['obsTime'] }}</p>
           <em class="qi-{{ now['icon'] }}"></em>
           <p class="realtime-text">{{ now['text'] }}</p>
         </div>
       </div>
-
-
-
       <div class="today-button">
         <div>
           <p>{{ now['windScale'] }}级</p>
@@ -65,7 +62,6 @@ function color() {
         </div>
       </div>
     </div>
-
     {% for w in warning["warning"] %}
     <div class="warning-box" id="warning-box">
       <div class="warning-side">
@@ -80,7 +76,6 @@ function color() {
       </div>
     </div>
     {% endfor %}
-
     {% if air %}
     <div class="air" id="air">
       <div class="air-box-top">
@@ -120,12 +115,11 @@ function color() {
       </div>
   </div>
   {% endif %}
-
     <div class="hours-weather" id="hours-weather">
       <div class="hour-box">
         {% for hour in hours %}
         <div class="hour-data">
-          <div class="hour-data">      
+          <div class="hour-data">
             <p>{{ hour["temp"] }}°</p>
             <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: {{ hour['temp_percent'] }};"></div></div>
             <p class="qi-{{ hour['icon'] }} icon-size"></p>
@@ -135,7 +129,6 @@ function color() {
         {% endfor %}
       </div>
     </div>
-
     <div class="days-weather" id="days-weather">
       {% for day in days %}
       <div class="days">
@@ -151,31 +144,25 @@ function color() {
         </div>
         <!-- 3 -->
         <div class="tem-line-box">
-
           <div class="days-icon">
             <div>
               <em class="qi-{{ day['iconDay'] }} icon-size icon-day"></em>
-
             </div>
             <div class="icon-night">
               <em class="qi-{{ day['iconNight'] }} icon-size icon-night"></em>
             </div>
           </div>
-
           <div class="tem-line-outbox">
             <div class="tem-line"></div>
           </div>
-
         </div>
         <!-- 4 -->
         <div class="tem-text">
           <p class="days-temp">{{ day["tempMin"] }}°</p>
           <p class="days-text">{{ day["textNight"]}}</p>
-
         </div>
       </div>
       {% endfor %}
     </div>
-  </div>
   </div>
 </body>
