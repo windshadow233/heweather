@@ -1,0 +1,48 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run main.py
+        env:
+          CITY_NAME: ${{ secrets.CITY_NAME }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          API_HOST: ${{ secrets.API_HOST }}
+          JWT_SUB: ${{ secrets.JWT_SUB }}
+          JWT_KEY_ID: ${{ secrets.JWT_KEY_ID }}
+        run: |
+          python main.py
+          mkdir -p publish/
+          cp -r heweather/templates/* publish/
+          mv weather.html publish/
+
+      - name: Copy templates to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: publish
