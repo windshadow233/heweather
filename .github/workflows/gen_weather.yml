@@ -13,11 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: 135
-          install-chromedriver: true
+      - name: Set timezone to Asia/Shanghai
+        run: |
+          sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+          echo "Asia/Shanghai" | sudo tee /etc/timezone
+          sudo dpkg-reconfigure -f noninteractive tzdata
+
+      - name: Install fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk fonts-noto-core fonts-noto-ui-core \
+            fonts-noto-unhinted fonts-noto-mono fonts-noto-color-emoji \
+            fonts-wqy-zenhei fonts-wqy-microhei
 
       - name: Set up Python
         uses: actions/setup-python@v4
