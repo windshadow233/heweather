@@ -11,7 +11,9 @@ window.onload = function () {
 };
 function color() {
     var date = new Date();
-    var current_hour = date.getHours();
+    var offsetMinutes = date.getTimezoneOffset();
+    var offsetToBeijing = offsetMinutes / 60 + 8;
+    var current_hour = (date.getHours() + offsetToBeijing) % 24;
 
     if (!(current_hour >= 6 && current_hour < 18)) {
         document.body.style.backgroundImage = "linear-gradient(rgb(25 23 58), rgb(25 29 45))";

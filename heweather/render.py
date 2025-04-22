@@ -42,8 +42,11 @@ def html_to_image(html_path, output_image='weather.png'):
     driver.get(html_file_url)
 
     time.sleep(1)
-
-    driver.set_window_size(1000, driver.execute_script("return document.body.scrollHeight") + 150)
+    driver.execute_script("""
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+    """)
+    driver.set_window_size(1000, driver.execute_script("return document.body.scrollHeight") + 155)
 
     driver.get_screenshot_as_file(output_image)
     driver.quit()
