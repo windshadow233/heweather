@@ -11,9 +11,7 @@ window.onload = function () {
 };
 function color() {
     var date = new Date();
-    var offsetMinutes = date.getTimezoneOffset();
-    var offsetToBeijing = offsetMinutes / 60 + 8;
-    var current_hour = (date.getHours() - offsetToBeijing + 24) % 24;
+    var current_hour = date.getHours();
 
     if (!(current_hour >= 6 && current_hour < 18)) {
         document.body.style.backgroundImage = "linear-gradient(rgb(25 23 58), rgb(25 29 45))";
@@ -40,7 +38,7 @@ function color() {
           <p class="realtime-tem">21°</p>
         </div>
         <div class="text-center">
-          <p class="obs-time">2025-04-22T13:48+08:00</p>
+          <p class="obs-time">2025-04-22T13:56+08:00</p>
           <em class="qi-501"></em>
           <p class="realtime-text">雾</p>
         </div>
@@ -48,10 +46,10 @@ function color() {
       <div class="today-button">
         <div>
           <p>2级</p>
-          <p class="des">西北风</p>
+          <p class="des">北风</p>
         </div>
         <div>
-          <p>78%</p>
+          <p>75%</p>
           <p class="des">相对湿度</p>
         </div>
         <div>
@@ -59,7 +57,7 @@ function color() {
           <p class="des">降水量</p>
         </div>
         <div>
-          <p>4km</p>
+          <p>5km</p>
           <p class="des">能见度</p>
         </div>
       </div>
@@ -110,63 +108,54 @@ function color() {
         <div class="hour-data">
           <div class="hour-data">
             <p>20°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 86px;"></div></div>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 83px;"></div></div>
             <p class="qi-104 icon-size"></p>
-            <p class="hour-des">2PM</p>
+            <p class="hour-des">3PM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
-            <p>20°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 86px;"></div></div>
+            <p>21°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 87px;"></div></div>
             <p class="qi-104 icon-size"></p>
-            <p class="hour-des">4PM</p>
+            <p class="hour-des">5PM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
-            <p>20°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 86px;"></div></div>
+            <p>19°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 79px;"></div></div>
             <p class="qi-104 icon-size"></p>
-            <p class="hour-des">6PM</p>
+            <p class="hour-des">7PM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
-            <p>18°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 77px;"></div></div>
-            <p class="qi-104 icon-size"></p>
-            <p class="hour-des">8PM</p>
-          </div>
-        </div>
-        
-        <div class="hour-data">
-          <div class="hour-data">
-            <p>16°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 68px;"></div></div>
+            <p>17°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 70px;"></div></div>
             <p class="qi-151 icon-size"></p>
-            <p class="hour-des">10PM</p>
+            <p class="hour-des">9PM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
             <p>15°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 63px;"></div></div>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 62px;"></div></div>
             <p class="qi-150 icon-size"></p>
-            <p class="hour-des">12AM</p>
+            <p class="hour-des">11PM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
             <p>14°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 59px;"></div></div>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 58px;"></div></div>
             <p class="qi-150 icon-size"></p>
-            <p class="hour-des">2AM</p>
+            <p class="hour-des">1AM</p>
           </div>
         </div>
         
@@ -175,43 +164,52 @@ function color() {
             <p>13°</p>
             <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 54px;"></div></div>
             <p class="qi-150 icon-size"></p>
-            <p class="hour-des">4AM</p>
+            <p class="hour-des">3AM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
-            <p>13°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 54px;"></div></div>
-            <p class="qi-100 icon-size"></p>
-            <p class="hour-des">6AM</p>
+            <p>12°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 50px;"></div></div>
+            <p class="qi-150 icon-size"></p>
+            <p class="hour-des">5AM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
-            <p>16°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 68px;"></div></div>
+            <p>15°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 62px;"></div></div>
             <p class="qi-100 icon-size"></p>
-            <p class="hour-des">8AM</p>
+            <p class="hour-des">7AM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
-            <p>20°</p>
-            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 86px;"></div></div>
+            <p>18°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 75px;"></div></div>
             <p class="qi-100 icon-size"></p>
-            <p class="hour-des">10AM</p>
+            <p class="hour-des">9AM</p>
           </div>
         </div>
         
         <div class="hour-data">
           <div class="hour-data">
             <p>22°</p>
+            <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 91px;"></div></div>
+            <p class="qi-100 icon-size"></p>
+            <p class="hour-des">11AM</p>
+          </div>
+        </div>
+        
+        <div class="hour-data">
+          <div class="hour-data">
+            <p>23°</p>
             <div class="tem-vert-line-box"><div class="tem-vert-line" style="height: 95px;"></div></div>
             <p class="qi-100 icon-size"></p>
-            <p class="hour-des">12PM</p>
+            <p class="hour-des">1PM</p>
           </div>
         </div>
         
