@@ -11,7 +11,9 @@ window.onload = function () {
 };
 function color() {
     var date = new Date();
-    var current_hour = date.getHours();
+    var offsetMinutes = date.getTimezoneOffset();
+    var offsetToBeijing = offsetMinutes / 60 + 8;
+    var current_hour = (date.getHours() + offsetToBeijing) % 24;
 
     if (!(current_hour >= 6 && current_hour < 18)) {
         document.body.style.backgroundImage = "linear-gradient(rgb(25 23 58), rgb(25 29 45))";
@@ -38,18 +40,18 @@ function color() {
           <p class="realtime-tem">21°</p>
         </div>
         <div class="text-center">
-          <p class="obs-time">2025-04-22T13:56+08:00</p>
+          <p class="obs-time">2025-04-22T14:00+08:00</p>
           <em class="qi-501"></em>
           <p class="realtime-text">雾</p>
         </div>
       </div>
       <div class="today-button">
         <div>
-          <p>2级</p>
+          <p>3级</p>
           <p class="des">北风</p>
         </div>
         <div>
-          <p>75%</p>
+          <p>71%</p>
           <p class="des">相对湿度</p>
         </div>
         <div>
@@ -57,7 +59,7 @@ function color() {
           <p class="des">降水量</p>
         </div>
         <div>
-          <p>5km</p>
+          <p>6km</p>
           <p class="des">能见度</p>
         </div>
       </div>
