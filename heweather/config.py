@@ -7,7 +7,7 @@ class Config:
     qweather_api_type = 0
     qweather_apihost = os.getenv('API_HOST')
     qweather_forecase_days = 7
-    qweather_hourlytype = HourlyType.current_24h
+    qweather_hourlytype = HourlyType.current_12h
 
     qweather_jwt_sub: str = os.getenv('JWT_SUB')
     qweather_jwt_private_key: str = os.getenv('PRIVATE_KEY')

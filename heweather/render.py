@@ -28,7 +28,7 @@ def render(weather: Weather) -> str:
         "hours": add_hour_data(weather.hourly.hourly),
     }
     env = Environment(loader=FileSystemLoader(template_path))
-    template = env.get_template("index.html")
+    template = env.get_template("weather.html")
     return template.render(**templates)
 
 

@@ -9,8 +9,9 @@ weather = Weather(config.qweather_city, config.qweather_api_type)
 weather.load_data()
 html = render(weather)
 
-with open('index.html', 'w') as f:
+with open('weather.html', 'w') as f:
     f.write(html)
 
-os.system("mkdir -p publish/ && cp -r heweather/templates/* publish/ && mv index.html publish/")
-html_to_image('publish/index.html', 'publish/weather.png')
+os.system("mkdir -p publish/ && cp -r heweather/templates/* publish/ && mv weather.html publish/")
+html_to_image('publish/weather.html', 'publish/weather.png')
+os.system("rm publish/weather.html")
