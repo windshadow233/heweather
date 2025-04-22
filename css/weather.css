@@ -40,9 +40,9 @@ p {
 }
 
 .obs-time {
-  font-size: 20px;
+  font-size: 25px;
   margin-bottom: 5px !important;
-  color: rgba(232, 230, 227, 0.55);
+  color: rgb(232, 230, 227);
 }
 
 em {
@@ -68,7 +68,7 @@ p.realtime-text {
 
 .des {
   font-size: 30px;
-  color: rgba(232, 230, 227, 0.55);
+  color: rgb(232, 230, 227);
 }
 
 .icon-size {
@@ -76,7 +76,7 @@ p.realtime-text {
 }
 
 .date {
-  color: rgba(232, 230, 227, 0.55);
+  color: rgb(232, 230, 227);
   font-size: 20px;
   text-size-adjust: 100%;
 }
@@ -142,7 +142,7 @@ p.realtime-text {
 
 .warning-time {
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.55);
+  color: white;
 }
 .warning-info {
   padding: 20px;
