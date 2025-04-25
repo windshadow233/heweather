@@ -2,10 +2,8 @@ from datetime import datetime
 from pathlib import Path
 import platform
 from jinja2 import Environment, FileSystemLoader
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 import os
-import time
+from playwright.sync_api import sync_playwright
 from .config import config
 from .model import Air, Daily, Hourly, HourlyType
 from .weather import Weather
@@ -33,23 +31,18 @@ def render(weather: Weather) -> str:
 
 
 def html_to_image(html_path, output_image='weather.png'):
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    driver = webdriver.Chrome(options=options)
-
     html_file_url = "file://" + os.path.abspath(html_path)
-    driver.get(html_file_url)
 
-    time.sleep(1)
-    driver.execute_script("""
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-    """)
-    driver.set_window_size(1000, driver.execute_script("return document.body.scrollHeight") + 155)
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(viewport={"width": 1000, "height": 800})
+        page.goto(html_file_url)
 
-    driver.get_screenshot_as_file(output_image)
-    driver.quit()
+        scroll_height = page.evaluate("document.body.scrollHeight")
+        page.set_viewport_size({"width": 1000, "height": scroll_height + 15})
+
+        page.screenshot(path=output_image)
+        browser.close()
 
 
 def add_hour_data(hourly: list[Hourly]):
