@@ -1,5 +1,6 @@
 import requests
 from urllib.parse import urljoin
+from retry import retry
 
 from .config import config
 from .model import AirApi, DailyApi, HourlyApi, NowApi, WarningApi
@@ -40,6 +41,7 @@ class Weather:
         self.hourly = self._hourly()
         self._data_validate()
 
+    @retry(tries=5, delay=1, backoff=2)
     def _get_data(self, url, params: dict) -> dict:
         headers = {
             "Authorization": f"Bearer {get_jwt_token()}",
