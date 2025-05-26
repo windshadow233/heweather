@@ -1,5 +1,6 @@
-import requests
+import httpx
 from urllib.parse import urljoin
+import asyncio
 from retry import retry
 
 from .config import config
@@ -32,27 +33,31 @@ class Weather:
             if self.api_type == 0 and not (3 <= self.forecast_days <= 7):
                 raise ConfigError("api_type = 0 免费订阅 预报天数必须 3<= x <=7")
 
-    def load_data(self):
-        self.city_id = self._get_city_id()
-        self.now = self._now()
-        self.daily = self._daily()
-        self.air = self._air()
-        self.warning = self._warning()
-        self.hourly = self._hourly()
+    async def load_data(self):
+        await self._get_city_id()
+        await asyncio.gather(
+            self._now(),
+            self._daily(),
+            self._air(),
+            self._warning(),
+            self._hourly(),
+        )
         self._data_validate()
 
     @retry(tries=5, delay=1, backoff=2)
-    def _get_data(self, url, params: dict) -> dict:
+    async def _get_data(self, url, params: dict) -> dict:
         headers = {
             "Authorization": f"Bearer {get_jwt_token()}",
         }
 
-        res = requests.get(url, params=params, headers=headers)
-        return res.json()
+        async with httpx.AsyncClient() as client:
+            res = await client.get(url, params=params, headers=headers)
+            res.raise_for_status()
+            return res.json()
 
-    def _get_city_id(self):
+    async def _get_city_id(self):
         url = urljoin(self.host, "/geo/v2/city/lookup")
-        res = self._get_data(
+        res = await self._get_data(
             url=url,
             params={"location": self.city_name, "number": 1},
         )
@@ -63,7 +68,7 @@ class Weather:
             raise APIError("错误! 错误代码: {}".format(res["code"]) + self.__reference)
         else:
             self.city_name = res["location"][0]["name"]
-            return res["location"][0]["id"]
+            self.city_id = res["location"][0]["id"]
 
     def _data_validate(self):
         if self.now.code == "200" and self.daily.code == "200":
@@ -84,47 +89,47 @@ class Weather:
         else:
             raise APIError(f"Response code:{response.get('code')}")
 
-    def _now(self) -> NowApi:
+    async def _now(self):
         url = urljoin(self.host, "/v7/weather/now")
-        res = self._get_data(
+        res = await self._get_data(
             url=url,
             params={"location": self.city_id},
         )
         self._check_response(res)
-        return NowApi(**res)
+        self.now = NowApi(**res)
 
-    def _daily(self) -> DailyApi:
+    async def _daily(self):
         url = urljoin(self.host, f"/v7/weather/{self.forecast_days}d")
-        res = self._get_data(
+        res = await self._get_data(
             url=url,
             params={"location": self.city_id},
         )
         self._check_response(res)
-        return DailyApi(**res)
+        self.daily = DailyApi(**res)
 
-    def _air(self) -> AirApi:
+    async def _air(self):
         url = urljoin(self.host, "/v7/air/now")
-        res = self._get_data(
+        res = await self._get_data(
             url=url,
             params={"location": self.city_id},
         )
         self._check_response(res)
-        return AirApi(**res)
+        self.air = AirApi(**res)
 
-    def _warning(self):
+    async def _warning(self):
         url = urljoin(self.host, "/v7/warning/now")
-        res = self._get_data(
+        res = await self._get_data(
             url=url,
             params={"location": self.city_id},
         )
         self._check_response(res)
-        return None if res.get("code") == "204" else WarningApi(**res)
+        self.warning = None if res.get("code") == "204" else WarningApi(**res)
 
-    def _hourly(self) -> HourlyApi:
+    async def _hourly(self):
         url = urljoin(self.host, "/v7/weather/24h")
-        res = self._get_data(
+        res = await self._get_data(
             url=url,
             params={"location": self.city_id},
         )
         self._check_response(res)
-        return HourlyApi(**res)
+        self.hourly = HourlyApi(**res)

@@ -3,7 +3,7 @@ from pathlib import Path
 import platform
 from jinja2 import Environment, FileSystemLoader
 import os
-from playwright.sync_api import sync_playwright
+from playwright.async_api import async_playwright
 from .config import config
 from .model import Air, Daily, Hourly, HourlyType
 from .weather import Weather
@@ -30,19 +30,19 @@ def render(weather: Weather) -> str:
     return template.render(**templates)
 
 
-def html_to_image(html_path, output_image='weather.png'):
+async def html_to_image(html_path, output_image='weather.png'):
     html_file_url = "file://" + os.path.abspath(html_path)
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page(viewport={"width": 1000, "height": 800})
-        page.goto(html_file_url)
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page(viewport={"width": 1000, "height": 800})
+        await page.goto(html_file_url)
 
-        scroll_height = page.evaluate("document.body.scrollHeight")
-        page.set_viewport_size({"width": 1000, "height": scroll_height + 15})
+        scroll_height = await page.evaluate("document.body.scrollHeight")
+        await page.set_viewport_size({"width": 1000, "height": scroll_height + 15})
 
-        page.screenshot(path=output_image)
-        browser.close()
+        await page.screenshot(path=output_image)
+        await browser.close()
 
 
 def add_hour_data(hourly: list[Hourly]):
