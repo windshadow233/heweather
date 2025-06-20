@@ -3,7 +3,7 @@ from .model import HourlyType
 
 
 class Config:
-    qweather_city = os.environ.get('CITY_NAME')
+    qweather_city = os.getenv('CITY_NAME')
     qweather_api_type = 0
     qweather_apihost = os.getenv('API_HOST')
     qweather_forecase_days = 7
